@@ -1,0 +1,69 @@
+import { motion } from "framer-motion";
+import { useState, type ReactNode } from "react";
+import { DraggableContainer } from "./DraggableContainer";
+import type { StackableItem } from "../../lib/types";
+
+type StackConfig = {
+  rotation: number;
+  scale: number;
+  perspective: number;
+};
+
+type CardStackProps<T extends StackableItem> = {
+  items: T[];
+  children: (item: T) => ReactNode;
+  containerClassName?: string;
+  cardClassName?: string;
+  stackConfig?: Partial<StackConfig>;
+};
+
+const defaultConfig: StackConfig = {
+  rotation: 5,
+  scale: 0.06,
+  perspective: 700,
+};
+
+export function CardStack<T extends StackableItem>({
+  items: initialItems,
+  children,
+  containerClassName = "relative h-80 w-64",
+  cardClassName = "absolute h-80 w-64 cursor-grab",
+  stackConfig = {},
+}: CardStackProps<T>) {
+  const [items, setItems] = useState(initialItems);
+  const config = { ...defaultConfig, ...stackConfig };
+
+  const sendToBack = (id: T["id"]) => {
+    setItems((prev) => {
+      const next = [...prev];
+      const index = next.findIndex((item) => item.id === id);
+      const [item] = next.splice(index, 1);
+      next.unshift(item);
+      return next;
+    });
+  };
+
+  return (
+    <div className={containerClassName} style={{ perspective: config.perspective }}>
+      {items.map((item, index) => (
+        <DraggableContainer
+          key={item.id}
+          onSendToBack={() => sendToBack(item.id)}
+          className={cardClassName}
+        >
+          <motion.div
+            className="h-full w-full"
+            animate={{
+              rotateZ: (items.length - index - 1) * config.rotation,
+              scale: 1 + index * config.scale - items.length * config.scale,
+              transformOrigin: "90% 90%",
+            }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          >
+            {children(item)}
+          </motion.div>
+        </DraggableContainer>
+      ))}
+    </div>
+  );
+}
