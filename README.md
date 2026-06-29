@@ -65,9 +65,6 @@ référence.
 
 ## Notes
 
-- Les dossiers `anime-scene-gallery-main/` et `image-card-stack-main/` sont les
-  références d'inspiration. Ils ne font pas partie du build (ignorés par Vite et
-  Tailwind) — tu peux les supprimer une fois le site finalisé.
 - `prefers-reduced-motion` est respecté (animations neutralisées).
 - Curseur personnalisé actif uniquement sur appareils à pointeur fin (desktop).
 

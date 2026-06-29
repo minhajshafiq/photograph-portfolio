@@ -1,69 +1,107 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "../../lib/gsap";
 
-/**
- * Minimal magnetic cursor. Follows the pointer with an eased quickTo and
- * morphs when hovering elements that carry a `data-cursor` attribute:
- *   - "hover" → small filled dot
- *   - "view"  → larger ring with a "View" label
- *   - "drag"  → ring with a "Drag" label
- * Disabled on touch / coarse-pointer devices.
- */
+type CursorVariant = "idle" | "hover" | "view" | "drag";
+
 export function Cursor() {
-  const dot = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const variantRef = useRef<CursorVariant>("idle");
+
+  const [enabled, setEnabled] = useState(false);
   const [label, setLabel] = useState("");
-  const [variant, setVariant] = useState<"idle" | "hover" | "view" | "drag">("idle");
+  const [variant, setVariant] = useState<CursorVariant>("idle");
 
   useEffect(() => {
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!fine) return;
+    const isFinePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
 
+    if (!isFinePointer || !dotRef.current) return;
+
+    setEnabled(true);
     document.body.classList.add("has-custom-cursor");
-    const el = dot.current!;
-    const xTo = gsap.quickTo(el, "x", { duration: 0.45, ease: "expo.out" });
-    const yTo = gsap.quickTo(el, "y", { duration: 0.45, ease: "expo.out" });
+
+    const el = dotRef.current;
+
+    gsap.set(el, {
+      xPercent: -50,
+      yPercent: -50,
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+
+    const xTo = gsap.quickTo(el, "x", {
+      duration: 0.45,
+      ease: "expo.out",
+    });
+
+    const yTo = gsap.quickTo(el, "y", {
+      duration: 0.45,
+      ease: "expo.out",
+    });
+
+    const setCursor = (next: CursorVariant, nextLabel = "") => {
+      if (variantRef.current === next) return;
+
+      variantRef.current = next;
+      setVariant(next);
+      setLabel(nextLabel);
+    };
 
     const move = (e: MouseEvent) => {
       xTo(e.clientX);
       yTo(e.clientY);
-      const target = (e.target as HTMLElement)?.closest("[data-cursor]");
-      const kind = target?.getAttribute("data-cursor");
+
+      const target = e.target as Element | null;
+      const cursorTarget = target?.closest?.("[data-cursor]");
+      const kind = cursorTarget?.getAttribute("data-cursor");
+
       if (kind === "view") {
-        setVariant("view");
-        setLabel("View");
+        setCursor("view", "View");
       } else if (kind === "drag") {
-        setVariant("drag");
-        setLabel("Drag");
+        setCursor("drag", "Drag");
       } else if (kind === "hover") {
-        setVariant("hover");
-        setLabel("");
+        setCursor("hover");
       } else {
-        setVariant("idle");
-        setLabel("");
+        setCursor("idle");
       }
     };
 
     window.addEventListener("mousemove", move);
+
     return () => {
       window.removeEventListener("mousemove", move);
       document.body.classList.remove("has-custom-cursor");
     };
   }, []);
 
-  const size = variant === "view" || variant === "drag" ? 80 : variant === "hover" ? 16 : 10;
-  const filled = variant === "hover";
+  const size =
+    variant === "view" || variant === "drag"
+      ? 80
+      : variant === "hover"
+        ? 18
+        : 12;
+
+  const isFilled = variant === "hover";
 
   return (
     <div
-      ref={dot}
-      className="pointer-events-none fixed left-0 top-0 z-[70] hidden items-center justify-center rounded-full border border-ink text-[10px] uppercase tracking-[0.15em] text-ink mix-blend-difference [body.has-custom-cursor_&]:flex"
+      ref={dotRef}
+      className={[
+        "pointer-events-none fixed left-0 top-0 z-[9999]",
+        "items-center justify-center rounded-full",
+        "border border-white text-[10px] font-medium uppercase tracking-[0.16em] text-white",
+        "mix-blend-difference",
+        enabled ? "flex" : "hidden",
+      ].join(" ")}
       style={{
         width: size,
         height: size,
-        marginLeft: -size / 2,
-        marginTop: -size / 2,
-        backgroundColor: filled ? "#0a0a0a" : "transparent",
-        transition: "width .3s var(--ease-expo), height .3s var(--ease-expo), background-color .3s",
+        backgroundColor: isFilled ? "#ffffff" : "transparent",
+        transition:
+          "width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease",
       }}
     >
       {label}

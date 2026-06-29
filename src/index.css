@@ -67,3 +67,7 @@ html.lenis body {
     transition-duration: 0.001ms !important;
   }
 }
+
+body.has-custom-cursor {
+  cursor: none;
+}
