@@ -5,6 +5,7 @@ type NavbarProps = {
 const LINKS = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ];
@@ -29,10 +30,9 @@ export function Navbar({ started }: NavbarProps) {
             key={link.href}
             href={link.href}
             data-cursor="hover"
-            className="group relative py-1 text-ink/70 transition-colors hover:text-ink"
+            className="group relative rounded-full px-3 py-1 text-ink/70 transition-colors hover:bg-ink hover:text-paper"
           >
             {link.label}
-            <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-ink transition-transform duration-300 ease-expo group-hover:scale-x-100" />
           </a>
         ))}
       </nav>

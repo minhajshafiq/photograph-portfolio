@@ -22,6 +22,7 @@ export function Hero({ started }: HeroProps) {
       gsap.to(".hero-title", {
         yPercent: -12,
         ease: "none",
+        force3D: false,
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
@@ -52,6 +53,7 @@ export function Hero({ started }: HeroProps) {
   return (
     <section
       ref={root}
+      data-cursor="hover"
       className="relative flex min-h-[100svh] flex-col justify-between px-6 pb-10 pt-28 md:px-12"
     >
       <div className="hero-fade flex items-center justify-between font-sans text-xs uppercase tracking-[0.25em] text-ink/60">

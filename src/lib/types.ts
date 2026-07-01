@@ -21,6 +21,8 @@ export type Category = {
   /** Short descriptor shown next to the label. */
   meta: string;
   photos: Photo[];
+  /** Kept in the data but hidden from the Work list until real photos land. */
+  hidden?: boolean;
 };
 
 export type StackableItem = {

@@ -17,7 +17,7 @@ export function CategoryRow({ category, active, onHover, onLeave }: CategoryRowP
       role="button"
       tabIndex={0}
       data-cursor="view"
-      className="group relative z-20 flex w-full cursor-pointer items-center justify-between gap-4 border-b border-ink/15 py-5 md:items-baseline md:py-7"
+      className="group relative z-20 flex w-full cursor-pointer items-center justify-between gap-4 border-b border-ink/15 px-4 py-5 transition-colors duration-300 hover:bg-ink md:items-baseline md:py-7"
       onMouseEnter={activate}
       onMouseMove={activate}
       onMouseLeave={onLeave}
@@ -37,7 +37,7 @@ export function CategoryRow({ category, active, onHover, onLeave }: CategoryRowP
           {category.label}
         </motion.span>
         {/* meta sits under the title on mobile */}
-        <span className="mt-2 block font-sans text-[11px] uppercase tracking-[0.2em] text-ink/50 md:hidden">
+        <span className="mt-2 block font-sans text-[11px] uppercase tracking-[0.2em] text-ink/50 transition-colors duration-300 group-hover:text-paper/60 md:hidden">
           {category.meta}
         </span>
       </div>
@@ -51,7 +51,7 @@ export function CategoryRow({ category, active, onHover, onLeave }: CategoryRowP
       />
 
       {/* meta on the right — desktop only */}
-      <span className="ml-4 hidden shrink-0 font-sans text-sm uppercase tracking-[0.2em] text-ink/50 md:block">
+      <span className="ml-4 hidden shrink-0 font-sans text-sm uppercase tracking-[0.2em] text-ink/50 transition-colors duration-300 group-hover:text-paper/60 md:block">
         {category.meta}
       </span>
     </motion.div>

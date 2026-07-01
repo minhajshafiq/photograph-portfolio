@@ -32,7 +32,7 @@ export function About() {
     >
       <div className="about-img overflow-hidden rounded-xl">
         <img
-          src="/img/work-02.jpg"
+          src="/img/portrait-01.jpg"
           alt="Portrait of Lyba"
           className="h-full w-full object-cover"
         />

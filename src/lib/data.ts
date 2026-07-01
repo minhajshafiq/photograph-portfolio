@@ -2,9 +2,18 @@ import type { Category, Photo } from "./types";
 
 // ── Real photos provided by Lyba ────────────────────────────────────────────
 const GYM = ["/img/gym_1.jpg"];
-const BUSINESS = ["/img/business_1.JPG", "/img/business_2.JPG"];
+const BUSINESS = [
+  "/img/business_1.JPG",
+  "/img/business_2.JPG",
+  "/img/business-03.jpg",
+];
+const PORTRAIT = [
+  "/img/image0.jpeg",
+  "/img/portrait-01.jpg",
+  "/img/portrait-02.jpg",
+];
 
-// ── Placeholders still to be replaced (Portrait / Video / Events) ────────────
+// ── Placeholders still to be replaced (Video / Events) ──────────────────────
 const PLACEHOLDER = [
   "/img/work-01.avif",
   "/img/work-02.jpg",
@@ -49,26 +58,34 @@ export const CATEGORIES: Category[] = [
     id: "portrait",
     label: "Portrait",
     meta: "people · editorial",
-    photos: makePhotos([PLACEHOLDER[1], PLACEHOLDER[2], PLACEHOLDER[0]]),
+    photos: makePhotos(PORTRAIT),
   },
   {
     id: "video",
     label: "Video",
     meta: "reels · short films",
     photos: makePhotos([PLACEHOLDER[3], PLACEHOLDER[0], PLACEHOLDER[1]]),
+    hidden: true,
   },
   {
     id: "events",
     label: "Events",
     meta: "live · coverage",
     photos: makePhotos([PLACEHOLDER[0], PLACEHOLDER[2], PLACEHOLDER[3]]),
+    hidden: true,
   },
 ];
+
+// Overflow shots from the same shoots — shown in the Gallery grid.
+export const GALLERY_IMAGES = Array.from(
+  { length: 20 },
+  (_, i) => `/img/gallery-${String(i + 1).padStart(2, "0")}.jpg`,
+);
 
 // Draggable showcase stack — leads with Lyba's real work.
 export const STACK_IMAGES = [
   "/img/gym_1.jpg",
   "/img/business_1.JPG",
   "/img/business_2.JPG",
-  "/img/work-01.avif",
+  "/img/image19.jpeg",
 ];

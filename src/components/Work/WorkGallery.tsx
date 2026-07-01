@@ -11,6 +11,8 @@ import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect
 
 const noop = () => {};
 
+const VISIBLE_CATEGORIES = CATEGORIES.filter((category) => !category.hidden);
+
 export function WorkGallery() {
   const [active, setActive] = useState<CategoryId | null>(null);
   const mouse = useMousePosition(5);
@@ -23,7 +25,7 @@ export function WorkGallery() {
 
   const clear = useCallback(() => setActive(null), []);
 
-  const current = interactive && active ? CATEGORIES.find((c) => c.id === active) : null;
+  const current = interactive && active ? VISIBLE_CATEGORIES.find((c) => c.id === active) : null;
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -62,7 +64,7 @@ export function WorkGallery() {
       </div>
 
       <div className="work-list">
-        {CATEGORIES.map((category) => (
+        {VISIBLE_CATEGORIES.map((category) => (
           <div className="work-row" key={category.id}>
             <CategoryRow
               category={category}

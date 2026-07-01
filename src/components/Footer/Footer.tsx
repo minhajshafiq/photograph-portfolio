@@ -3,7 +3,7 @@ import { gsap } from "../../lib/gsap";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
 const SOCIALS = [
-  { label: "Instagram", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/_lulu.k1/" },
   { label: "TikTok", href: "#" },
   { label: "YouTube", href: "#" },
 ];
@@ -48,11 +48,11 @@ export function Footer() {
         </h2>
 
         <a
-          href="mailto:hello@lyba.co.uk"
+          href="mailto:lybakhan212@gmail.com"
           data-cursor="hover"
-          className="mt-10 inline-block w-fit border-b border-paper/40 pb-1 font-sans text-xl transition-colors hover:border-accent hover:text-accent md:text-3xl"
+          className="mt-10 inline-block w-fit rounded-full border-b border-paper/40 px-2 pb-1 font-sans text-xl transition-colors hover:border-paper hover:bg-paper hover:text-ink md:text-3xl"
         >
-          hello@lyba.co.uk
+          lybakhan212@gmail.com
         </a>
       </div>
 
@@ -62,8 +62,10 @@ export function Footer() {
             <a
               key={s.label}
               href={s.href}
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              rel={s.href.startsWith("http") ? "noreferrer" : undefined}
               data-cursor="hover"
-              className="text-paper/60 transition-colors hover:text-paper"
+              className="rounded-full px-2 py-0.5 text-paper/60 transition-colors hover:bg-paper hover:text-ink"
             >
               {s.label}
             </a>

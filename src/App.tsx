@@ -6,6 +6,7 @@ import { Hero } from "./components/Hero/Hero";
 import { WorkGallery } from "./components/Work/WorkGallery";
 import { Showcase } from "./components/Showcase/Showcase";
 import { About } from "./components/About/About";
+import { Gallery } from "./components/Gallery/Gallery";
 import { Services } from "./components/Services/Services";
 import { Footer } from "./components/Footer/Footer";
 import { useLenis } from "./hooks/useLenis";
@@ -29,6 +30,7 @@ export default function App() {
         <WorkGallery />
         <Showcase />
         <About />
+        <Gallery />
         <Services />
         <Footer />
       </main>
