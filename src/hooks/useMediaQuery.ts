@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
  * SSR-safe (returns false until mounted).
  */
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
+  const [matches, setMatches] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches,
+  );
 
   useEffect(() => {
     const mql = window.matchMedia(query);

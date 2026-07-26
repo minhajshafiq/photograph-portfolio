@@ -56,11 +56,6 @@ html.lenis body {
   display: block;
 }
 
-.reveal-line {
-  display: block;
-  will-change: transform;
-}
-
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.001ms !important;

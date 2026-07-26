@@ -1,14 +1,14 @@
 import type { Category, Photo } from "./types";
 
 // ── Real photos provided by Lyba ────────────────────────────────────────────
-const GYM = ["/img/gym_1.jpg"];
+const GYM = ["/img/gym-01.jpg"];
 const BUSINESS = [
-  "/img/business_1.JPG",
-  "/img/business_2.JPG",
+  "/img/business-01.jpg",
+  "/img/business-02.jpg",
   "/img/business-03.jpg",
 ];
 const PORTRAIT = [
-  "/img/image0.jpeg",
+  "/img/portrait-00.jpg",
   "/img/portrait-01.jpg",
   "/img/portrait-02.jpg",
 ];
@@ -84,8 +84,8 @@ export const GALLERY_IMAGES = Array.from(
 
 // Draggable showcase stack — leads with Lyba's real work.
 export const STACK_IMAGES = [
-  "/img/gym_1.jpg",
-  "/img/business_1.JPG",
-  "/img/business_2.JPG",
-  "/img/image19.jpeg",
+  "/img/gym-01.jpg",
+  "/img/business-01.jpg",
+  "/img/business-02.jpg",
+  "/img/showcase-01.jpg",
 ];

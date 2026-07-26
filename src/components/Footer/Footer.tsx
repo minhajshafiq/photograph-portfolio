@@ -4,8 +4,6 @@ import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/_lulu.k1/" },
-  { label: "TikTok", href: "#" },
-  { label: "YouTube", href: "#" },
 ];
 
 export function Footer() {

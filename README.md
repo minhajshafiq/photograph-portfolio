@@ -19,10 +19,11 @@ Framer Motion gère les deux interactions inspirées des références fournies.
 ## Démarrer
 
 ```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # build de production dans /dist
-npm run preview  # prévisualiser le build
+pnpm install
+pnpm dev      # http://localhost:5173
+pnpm build    # build de production dans /dist
+pnpm preview  # prévisualiser le build
+pnpm lint     # ESLint
 ```
 
 ## Structure
@@ -70,9 +71,19 @@ référence.
 
 ## TODO / pistes
 
-- [ ] Intégrer les vraies photos et textes
-- [ ] Polices définitives (actuellement Anton + Inter via Google Fonts)
+- [x] Intégrer les vraies photos et textes
+- [x] Polices définitives (Anton + Inter via Google Fonts)
+- [x] SEO de base : meta Open Graph / Twitter Card (`index.html`)
+- [ ] Catégories **Video** et **Events** : présentes dans `src/lib/data.ts`
+      (`hidden: true`) mais pointent vers des images `work-01..04` qui
+      n'existent pas dans `public/img/`. Ajouter les vraies photos/vidéos
+      puis retirer `hidden: true` pour les afficher dans le Work.
+- [ ] Liens sociaux : Instagram est réel, TikTok/YouTube ont été retirés du
+      footer (placeholders `#`) — à rajouter dans `Footer.tsx` avec les
+      vraies URLs.
 - [ ] Page projet détaillée / lightbox au clic d'une catégorie
-- [ ] SEO : meta OpenGraph, favicon final, sitemap
+- [ ] SEO avancé : une fois le domaine final connu, ajouter `og:url`,
+      `sitemap.xml`, `robots.txt` et un favicon PNG/ICO définitif
+      (actuellement `aperture.svg` seul)
 - [ ] Déploiement (Vercel / Netlify)
 ```
